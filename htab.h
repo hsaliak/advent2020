@@ -6,7 +6,7 @@
 #include <assert.h>
 
 #define container_of(ptr, type, member) \
-  ((type *)((char *)(ptr)  - offsetof(type, member)))
+  ((ptr) ? ((type *)((char *)(ptr)  - offsetof(type, member))) : 0)
 
 #define HASHSIZ 4096
 
@@ -54,33 +54,3 @@ hash_entry_ptr_t * hashtable_new(void);
 
 /* destroy allocated memory for the hash table */
 void hashtable_destroy(hash_entry_ptr_t *hptr);
-
-
-/*
-typedef struct int_slice {
-  int * items;
-  ssize_t len;
-  ssize_t cap;
-} int_slice_t;
-
-int int_slice_push(int_slice_t * is, int item) {
-  if (is->len == is->cap) {
-    void * rv;
-    rv = realloc(is->items, sizeof(int) * 2 * is->cap);
-    assert(rv != NULL);
-
-    is->items = (int *) rv;
-  }
-  is->items[is->len++] = item;
-  return 0;
-}
-
-int int_slice_pop(int_slice_t* is) {
-  assert(is->len > 0);
-  is->len -=1; // reduce the length 
-  return is->items[is->len];
-}
-*/
-
-
-

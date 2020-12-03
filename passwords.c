@@ -106,7 +106,7 @@ int passwords_from_file(char * filename, password_t ** passwords) {
   } else { 
   /* else, append to list */
     list_insert(listptr, &pwd->ls);
-    listptr = &pwd->ls; /* convenience, so we can insert at tail */
+     listptr = &pwd->ls; /* convenience, so we can insert at tail */
   }
   }
   return 0;
