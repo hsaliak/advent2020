@@ -14,6 +14,9 @@ executable('day1', 'day1.c',
 		   link_with: numbers)
 executable('day2', 'day2.c',
 		   link_with: passwords)	
-		   
+
+executable('day3', 'day3.c',
+		   link_with: htab)	
+
 
 

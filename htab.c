@@ -5,12 +5,8 @@
 
 /*************** list api ***************/
 bool list_is_tail(list_ptr_t elt) {
-
-  if (elt == NULL || elt->next == NULL) {
-    return true;
-  } else {
-      return false;
-    }
+  if (elt == NULL || elt->next == NULL) return true;
+  return false;
 }
 inline bool list_is_parent(list_ptr_t elt) {
   return !list_is_tail(elt);

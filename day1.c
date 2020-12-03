@@ -29,11 +29,6 @@ void day1_2(int * numbers, size_t len) {
 
 int main() {
   numbers_t nums = {0};
-  numbers_append(&nums, 1);
-  numbers_append(&nums, 2);
-  numbers_append(&nums, 3);
-  numbers_free(&nums);
-
   char * filename = "day1_input.txt";
   numbers_from_file(filename, &nums);
   /* now we have the numbers, lets see if they sum to 2020 */

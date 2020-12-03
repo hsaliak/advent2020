@@ -14,8 +14,10 @@ typedef struct {
 int passwords_from_file(char *, password_t ** );
 bool password_is_valid_1(password_t *);
 bool password_is_valid_2(password_t *);
-#define password_from_list(x_) ((x_) ? (password_t *)container_of((x_), password_t, ls) : 0)
-#define password_next(x_) ((x_) ? password_from_list((x_)->ls.next) : 0)
+#define password_from_list(x_) (password_t *)container_of((x_), password_t, ls)
+// #define password_next(x_) ((x_) ? password_from_list((x_)->ls.next) : 0)
+#define password_next(x_) (password_from_list((x_)->ls.next))
+
 int passwords_valid_1(password_t *);
 int passwords_valid_2(password_t *);
 void password_free(password_t *);
