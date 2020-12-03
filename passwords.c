@@ -65,7 +65,8 @@ int passwords_valid_2(password_t *pwd) {
 }
 
 /* frees the entire password list */
-void password_freelist(password_t * pwd) {
+void password_freelist(password_t * pwd) { 
+if (pwd == NULL) return;
   if (password_next(pwd) != NULL) {
     password_freelist(password_next(pwd));
   }
