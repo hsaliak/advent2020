@@ -18,6 +18,8 @@ typedef struct list {
 
 typedef list_t *list_ptr_t;
 
+
+
 // define the list api
 void list_insert(list_ptr_t, list_ptr_t); // add to the chain
 list_ptr_t
