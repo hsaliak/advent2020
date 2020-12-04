@@ -49,6 +49,7 @@ int map_from_file(char * filename, map_t ** map_pptr) {
       listptr = &mptr->ls; /* same some on the insert */
     }
   }
+  fclose(stream);
   return 0;
 }
 

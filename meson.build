@@ -18,5 +18,8 @@ executable('day2', 'day2.c',
 executable('day3', 'day3.c',
 		   link_with: htab)	
 
+executable('day4', 'day4.c',
+		   link_with: htab)	
+
 
 
