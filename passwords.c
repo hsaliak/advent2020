@@ -80,6 +80,7 @@ int passwords_from_file(char * filename, password_t ** passwords) {
     perror("fopen");
     return -1; /*signal error */
   }
+
   /* placeholders for password */
   if (*passwords != NULL) {
     fprintf(stderr, "warning: stomping over password argument in %s",__FUNCTION__);
@@ -109,6 +110,7 @@ int passwords_from_file(char * filename, password_t ** passwords) {
      listptr = &pwd->ls; /* convenience, so we can insert at tail */
   }
   }
+  fclose(stream);
   return 0;
 }
 

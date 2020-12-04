@@ -15,7 +15,7 @@ inline bool list_is_parent(list_ptr_t elt) {
 		    
 void list_insert__(list_ptr_t elts, list_ptr_t elt, bool keepnext) {
   if (elts == NULL) {
-    return;
+    return ; 
   }
   while(list_is_parent(elts)){
     elts = elts->next;
@@ -24,16 +24,16 @@ void list_insert__(list_ptr_t elts, list_ptr_t elt, bool keepnext) {
   if (!keepnext)  {
     elt->next = NULL;
   }
-  return;
+  return ;
 }
 
 void list_insert(list_ptr_t elts, list_ptr_t elt) {
-  list_insert__(elts, elt, false);
+  return list_insert__(elts, elt, false);
 }
 
 /* does not clear out the elt's next ptr, useful for merging lists */
 void list_insert_keepnext(list_ptr_t elts, list_ptr_t elt) {
-  list_insert__(elts, elt, true); 
+  return list_insert__(elts, elt, true); 
 }
 
 list_ptr_t list_remove(list_ptr_t elts, list_ptr_t elt) {
