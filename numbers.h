@@ -1,4 +1,5 @@
 #pragma once
+#include <stdlib.h>
 
 /* numbers_t is a flexible structure for a bunch of numbers */
 typedef struct {
