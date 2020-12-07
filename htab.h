@@ -35,8 +35,7 @@ void list_insert_keepnext(list_ptr_t, list_ptr_t);
 
 typedef struct hash_entry {
   uint64_t hashval;
-  list_ptr_t lst;
-  //  struct hash_entry * next; // so that we can chain into the bucket.
+  list_t lst;
 } hash_entry_t;
 
 typedef hash_entry_t *hash_entry_ptr_t;
@@ -58,21 +57,6 @@ hash_entry_ptr_t * hashtable_new(void);
 /* destroy allocated memory for the hash table */
 void hashtable_destroy(hash_entry_ptr_t *hptr);
 
-
-#define slice_(TYPE) typedef struct {					\
-    size_t len;								\
-    size_t cap;								\
-    TYPE * data;								\
-  } slice_ ##TYPE;							\
-  void slice_ ##TYPE##_push(slice_ ##TYPE *  slc , TYPE * item) {	\
-  if (!slc->cap) slc->cap = 1; /* initialize */				\
-  if (slc->len == 0 || slc->cap == slc->len) {\
-  slc->data = realloc((void *) slc->data, slc->cap * sizeof(TYPE)  * 2);	\
-  slc->cap = slc->cap * 2;						\
-  }\
-  memcpy(slc->data + slc->len++, item, sizeof(*item));			\
-  }
-  
 
 
 
