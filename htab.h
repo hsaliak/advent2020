@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <malloc.h>
 #include <stdbool.h>
+#include <string.h>
 #include <assert.h>
 
 #define container_of(ptr, type, member) \
@@ -56,3 +57,26 @@ hash_entry_ptr_t * hashtable_new(void);
 
 /* destroy allocated memory for the hash table */
 void hashtable_destroy(hash_entry_ptr_t *hptr);
+
+
+#define slice_(TYPE) typedef struct {					\
+    size_t len;								\
+    size_t cap;								\
+    TYPE * data;								\
+  } slice_ ##TYPE;							\
+  void slice_ ##TYPE##_push(slice_ ##TYPE *  slc , TYPE * item) {	\
+  if (!slc->cap) slc->cap = 1; /* initialize */				\
+  if (slc->len == 0 || slc->cap == slc->len) {\
+  slc->data = realloc((void *) slc->data, slc->cap * sizeof(TYPE)  * 2);	\
+  slc->cap = slc->cap * 2;						\
+  }\
+  memcpy(slc->data + slc->len++, item, sizeof(*item));			\
+  }
+  
+
+
+
+
+  
+  
+  
