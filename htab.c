@@ -39,7 +39,6 @@ void list_insert_keepnext(list_ptr_t elts, list_ptr_t elt) {
 list_ptr_t list_remove(list_ptr_t elts, list_ptr_t elt) {
   list_ptr_t retval = NULL;
   if (elts == NULL || elt == NULL) {
-    fprintf(stderr,"%s - elts or elt is NULL\n", __FUNCTION__);
     return NULL;
   }
   while(elts != NULL) {
@@ -65,34 +64,35 @@ list_ptr_t list_remove(list_ptr_t elts, list_ptr_t elt) {
   (hash_entry_t *) (container_of((x_), hash_entry_t, lst))
 
 hash_entry_ptr_t htab_next(hash_entry_ptr_t hptr) {
-  if(list_is_tail(hptr->lst)) {
+  if(list_is_tail(&hptr->lst)) {
     return NULL;
   }
-  return htab_entry_from_list(hptr->lst->next);
+  return htab_entry_from_list(hptr->lst.next);
 }
 
 hash_entry_t *  htab_search(hash_entry_ptr_t* htab, hash_entry_t *hptr) {
   ssize_t key = hptr->hashval & (HASHSIZ -1);
-  printf("getting entry at key %ld\n", key);
   hash_entry_t * begin = htab[key]; // grab the first entry
   if (begin == NULL) {
     return NULL; // key not found
   }
-  while (begin->hashval != hptr->hashval && begin != NULL) {
+  while (begin != NULL && (begin->hashval != hptr->hashval)) {
     begin = htab_next(begin); 
   }
   return begin;
 }
 
 void htab_insert(hash_entry_ptr_t* htab,  hash_entry_t * hptr) { // we can simplify this by using HASHSIZ
+  if (htab_search(htab, hptr)) {
+    return;
+  }// if the hash already exists, return, avoids circular references.
   ssize_t key = hptr->hashval & (HASHSIZ -1);
   if (htab[key] == NULL) {
     htab[key] = hptr;
-  } else {
-    list_t * lsptr = htab[key]->lst; // grab the list item
-    list_insert(lsptr, hptr->lst);
+  } else { // ensure that we do not circular this when we re-insert
+    list_t * lsptr = &htab[key]->lst; // grab the list item
+    list_insert(lsptr, &hptr->lst);
   }
-  printf("inserted entry  %lud at key %ld\n", hptr->hashval, key);
 }
 
 int  htab_delete(hash_entry_ptr_t *htab, hash_entry_t *hptr) {
@@ -115,7 +115,7 @@ int  htab_delete(hash_entry_ptr_t *htab, hash_entry_t *hptr) {
   if (next == NULL) {
     return -1; // key not found something is wrong.
   } else { // found it!
-    list_remove(parent->lst, next->lst);
+    list_remove(&parent->lst, &next->lst);
   }
   return 0;
 }

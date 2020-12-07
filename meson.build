@@ -26,5 +26,9 @@ executable('day5', ['day5.c', 'lines.c'],
 executable('day6', ['day6.c', 'lines.c'],
 		   		   link_with: [htab])				
 
+executable('day7', ['day7.c', 'lines.c'],
+		   dependencies : [xxhash_dep],
+		    link_with: [htab])				
+
 
 
