@@ -172,7 +172,8 @@ int day_7_1( bag_t * bag, char * lookfor, hash_entry_ptr_t * allbags) {
   // ok we are going to do a depth first search and see if every bag can hold a gold bag.
   int count = 0;
   /* here's the plan.
-     1. for each bag, check if he _bag_ can hold using a dfs - either the color matches or the bool can_hold is set to true.
+     1. for each bag, check if he _bag_ can hold using a dfs - either the color
+matches or the bool can_hold is set to true.
      2. call recursive function which 1) checks if it is it, if not call itself
 on each of it's children
      3. if the child call returns positive, return positive

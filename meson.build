@@ -30,5 +30,8 @@ executable('day7', ['day7.c', 'lines.c'],
 		   dependencies : [xxhash_dep],
 		    link_with: [htab])				
 
+executable('day8', ['day8.c', 'lines.c'],
+		   		   link_with: [htab])				
+
 
 
