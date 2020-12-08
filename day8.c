@@ -136,6 +136,7 @@ bool check_corrupt(machine_t *m) {
   }
   if (pc == m->ins_len) {
     printf("Valid Program! [pc:%d] [accum:%lu]\n", pc, m->accum);
+  m->accum = 0;
     return false;
   }
   m->accum = 0;
