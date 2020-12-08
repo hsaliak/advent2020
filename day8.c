@@ -142,6 +142,7 @@ bool check_corrupt(machine_t *m) {
   return true;
 }
 
+/* toggles JMP and NOP, does nothing for ACC */
 INS toggle(INS i) {
   switch (i) {
   case JMP: return NOP; break;
@@ -155,7 +156,7 @@ INS toggle(INS i) {
 void fix_program(machine_t * m) {
   // check for corruption.
   // iterate through the instructions
-  // if you see a jmp or nop, toggle it.
+  // toggle every instruction 
   // if the program is valid, you are done.
   // if the program is not valid, then toggle that instruction again and go to the next one.
   if(!check_corrupt(m)) return; // what if the program is valid, return it.
