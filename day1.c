@@ -4,23 +4,23 @@
 #include "numbers.h"
 
 
-void day1(int * numbers, size_t len) {
+void day1(int64_t * numbers, size_t len) {
   
   for (int i = 0 ; i < len; i++)
     for (int j = i+1 ; j < len; j++) {
       if (numbers[i] + numbers[j] == 2020) {
-	printf("%d\n", numbers[i] *numbers[j]);
+	printf("%ld\n", numbers[i] *numbers[j]);
 	return;
       }
     }
   printf("nothing found!\n");
 }
-void day1_2(int * numbers, size_t len) {
+void day1_2(int64_t * numbers, size_t len) {
   for (int i = 0 ; i < len; i++)
     for (int j = i+1 ; j < len; j++) {
       for (int k = j+1 ; k < len ; k++) {
       if (numbers[i] + numbers[j] + numbers[k] == 2020) {
-	printf("%d\n", numbers[i] *numbers[j] * numbers[k]);
+	printf("%ld\n", numbers[i] *numbers[j] * numbers[k]);
 	return;
       }
       }

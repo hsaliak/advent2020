@@ -32,6 +32,8 @@ executable('day7', ['day7.c', 'lines.c'],
 
 executable('day8', ['day8.c', 'lines.c'],
 		   		   link_with: [htab])				
+executable('day9', ['day9.c', 'lines.c'],
+		   		   link_with: [htab, numbers])				
 
 
 

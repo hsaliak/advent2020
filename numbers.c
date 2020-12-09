@@ -7,14 +7,14 @@
 int numbers_grow(numbers_t * nums) {
   if (nums->cap ==0) {
     nums->cap = 10;
-    nums->numbers = realloc(nums->numbers, sizeof(int) * nums->cap);
+    nums->numbers = realloc(nums->numbers, sizeof(int64_t) * nums->cap);
     if (nums->numbers == NULL) {
       goto fail;
   }
   }
   if (nums->len == nums->cap) {
     nums->cap = nums->cap * 2;
-    nums->numbers = realloc(nums->numbers,nums->cap * sizeof(int));
+    nums->numbers = realloc(nums->numbers,nums->cap * sizeof(int64_t));
     if (nums->numbers == NULL) {
       goto fail;
     }

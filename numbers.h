@@ -1,9 +1,10 @@
 #pragma once
 #include <stdlib.h>
+#include <stdint.h>
 
 /* numbers_t is a flexible structure for a bunch of numbers */
 typedef struct {
-  int * numbers;
+  int64_t * numbers;
   size_t len;
   size_t cap;
 
