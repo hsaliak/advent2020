@@ -12,8 +12,8 @@ typedef struct {
 
 int numbers_grow(numbers_t *);
 
-int numbers_append(numbers_t *, int);
-
+int numbers_append(numbers_t *, int64_t
+);
 void numbers_free(numbers_t *);
 
 int numbers_from_file(char *, numbers_t *);
