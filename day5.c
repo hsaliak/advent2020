@@ -46,7 +46,7 @@ int pass_col(lines_t * lines) {
 }
 
 int compare_ints(const void * lhs, const void * rhs) {
-  return  *(int *)lhs - * (int *)rhs;
+  return  *(int64_t *)lhs - * (int64_t *)rhs;
 }
 
 int find_seat(lines_t * lines) {
@@ -60,7 +60,7 @@ int find_seat(lines_t * lines) {
     numbers_append(&nums, id);
   }
   // sort the numbers
-  qsort(nums.numbers, nums.len, sizeof(int), compare_ints);
+  qsort(nums.numbers, nums.len, sizeof(int64_t), compare_ints);
   for(int i = 0 ; i < nums.len -1;i++) {
     if (nums.numbers[i+1] - nums.numbers[i] != 1) {
       seat = nums.numbers[i] +1;
