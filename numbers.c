@@ -27,7 +27,7 @@ int numbers_grow(numbers_t * nums) {
 }
 
 
-int numbers_append(numbers_t *  nums, int num) {
+int numbers_append(numbers_t *  nums, int64_t num) {
   if (nums->cap == 0 || nums->len == nums->cap) {
     assert(numbers_grow(nums) == 0);
   }
@@ -49,8 +49,8 @@ int numbers_from_file(char * filename, numbers_t * nums)  {
     perror("fopen");
     return -1;
   }
-  int num = 0;
-  while (fscanf(stream, "%d\n", &num) != EOF) {
+  int64_t num = 0;
+  while (fscanf(stream, "%ld\n", &num) != EOF) {
     numbers_append(nums, num);
   }
   fprintf(stderr, "read %zu numbers\n", nums->len);
