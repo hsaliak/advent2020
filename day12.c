@@ -22,45 +22,25 @@ typedef struct {
 } ship_t;
 
 ship_t steer(ship_t sh, step_t s) {
-  assert (s.move == 'L' || s.move == 'R');
-  int rotation = s.distance / 90; // its either 0 , 1 or 2 or 3 or 4.
-  if (s.move == 'L') rotation = -rotation;
+  int angle = (s.move == 'L') ? 360 - s.distance : s.distance;
+  int rotation = angle / 90;
   sh.facing = (sh.facing + rotation) % 4;
   return sh;
 }
 
-ship_t advance(ship_t sh, int distance) {
-  switch (sh.facing) { 
-  case EAST:
-    sh.units[EAST] += distance;
-    return sh;
-  case WEST:
-    sh.units[WEST] += distance;
-    return sh;
-  case NORTH:
-    sh.units[NORTH] += distance;
-    return sh;
-  case SOUTH:
-    sh.units[SOUTH] += distance;
-  default:
-    return sh;
-  }
-  return sh;
-}
-
 ship_t move(ship_t sh, step_t s) {
+  
   switch(s.move) {
-  case 'N':
+    case 'N':
     sh.units[NORTH] += s.distance;
     return sh;
   case 'S':
     sh.units[SOUTH] += s.distance;
     return sh;
-
-      case 'E':
+  case 'E':
     sh.units[EAST] += s.distance;
     return sh;
-      case 'W':
+  case 'W':
     sh.units[WEST] += s.distance;
     return sh;
   case 'L':
@@ -68,7 +48,8 @@ ship_t move(ship_t sh, step_t s) {
   case 'R':
       return steer(sh, s);
   case 'F':
-    return advance(sh, s.distance);
+    sh.units[sh.facing] += s.distance;
+    return sh;
   default:
     return sh;
   }
@@ -94,10 +75,7 @@ ship_t move_to_waypoint(ship_t ship, ship_t waypoint, int multiplier) {
 
 ship_t rotate_around_ship(ship_t ship, ship_t waypoint, step_t step) {
   // start at 0
-  int angle =0;
-  if (step.move == 'L') angle = 360 - step.distance;
-  else
-    angle = step.distance;
+  int angle = (step.move == 'L') ? 360 - step.distance : step.distance;
   int rotation = angle / 90;
   ship_t wret = {0};
   for (int i = 0 ; i < 4; i++) {
@@ -117,16 +95,10 @@ void loop2(lines_t * lines, ship_t ship, ship_t waypoint) {
       ship = move_to_waypoint(ship, waypoint, step.distance);
       break;
     case 'N':
-      // move the waypoint
-      waypoint = move(waypoint, step);
-      break;
     case 'S':
-      waypoint = move(waypoint, step);
-      break;
     case 'E':
-      waypoint = move(waypoint, step);
-      break;
     case 'W':
+      // move the waypoint
       waypoint = move(waypoint, step);
       break;
     case 'L':
@@ -134,8 +106,6 @@ void loop2(lines_t * lines, ship_t ship, ship_t waypoint) {
       // rotate waypoint around ship wtf
       waypoint = rotate_around_ship(ship, waypoint, step);
       break;
-  default:
-    break;
     }
   }
     printf("%d\n", abs(ship.units[NORTH] - ship.units[SOUTH]) + abs(ship.units[EAST] - ship.units[WEST]));
