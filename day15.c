@@ -16,12 +16,12 @@ counter_t *  counter_for(counter_t * counters, size_t clen, int lookfor, int cou
   // create a counter for the value
   assert(lookfor < clen);
   counter_t * counter = &counters[lookfor];
-  if (!counter->seen) {
-    counter->seen = true;
-    counter->previous =  -1;
+  if (counter->seen) {
+    counter->previous = counter->count;
     counter->count = count;
   } else {
-    counter->previous = counter->count;
+    counter->seen = true;
+    counter->previous = -1;
     counter->count = count;
   }
   return counter;
