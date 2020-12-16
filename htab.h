@@ -9,6 +9,7 @@
 #define container_of(ptr, type, member) \
   ((ptr) ? ((type *)((char *)(ptr)  - offsetof(type, member))) : 0)
 
+/* this is a toy */
 #define HASHSIZ 4096
 
 
@@ -61,11 +62,7 @@ hash_entry_ptr_t * hashtable_new(void);
 
 /* destroy allocated memory for the hash table */
 void hashtable_destroy(hash_entry_ptr_t *hptr);
+#define htab_container(ptr, type) container_of(ptr, type, ht)
 
+void htab_forach(hash_entry_ptr_t, void (*)(void *));
 
-
-
-
-  
-  
-  
