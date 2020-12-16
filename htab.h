@@ -31,7 +31,12 @@ bool list_is_parent(list_ptr_t);
 bool list_is_tail(list_ptr_t); // if the next element is null.
 void list_insert_keepnext(list_ptr_t, list_ptr_t);
 
+#define list_container(ptr, type) container_of(ptr, type, ls)
+#define list_next(ptr, type) ((ptr) ? list_container((ptr)->ls.next, type): 0)
+
+
 /*************** end list api ***************/
+
 
 typedef struct hash_entry {
   uint64_t hashval;
