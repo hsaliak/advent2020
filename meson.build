@@ -50,4 +50,7 @@ executable('day14', ['day14.c', 'lines.c'],
 executable('day15', ['day15.c', 'lines.c'],
 		   		   link_with: [htab])	
 
+executable('day16', ['day16.c', 'lines.c'],
+		   		   link_with: [htab])	
+
  
