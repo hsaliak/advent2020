@@ -41,11 +41,16 @@ list_ptr_t list_remove(list_ptr_t elts, list_ptr_t elt) {
   if (elts == NULL || elt == NULL) {
     return NULL;
   }
-  while(elts != NULL) {
+  while(elts != NULL) { 
+    if (elts == elt) {
+      elts = elt->next;
+      retval = elts;
+      return retval;
+    }
     if (elts->next == elt) {
       elts->next = elts->next->next;
-      //      elts->next = elts->next->next;  // swallow that item
-      retval = elt;
+      retval = elts->next;
+      return retval;
     }
     elts = elts->next;
   }
@@ -110,7 +115,7 @@ int  htab_delete(hash_entry_ptr_t *htab, hash_entry_t *hptr) {
   hash_entry_t * parent = htab[key]; // we already checked that the first item isnt
   hash_entry_ptr_t  next = htab_next(parent);
   while(next != NULL && next->hashval != hptr->hashval) {
-    next = htab_next(parent);
+    next = htab_next(next); // maybe
   }
   if (next == NULL) {
     return -1; // key not found something is wrong.

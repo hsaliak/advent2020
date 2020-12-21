@@ -9,6 +9,9 @@ htab = library('htab', 'htab.c',
 numbers = library('numbers', 'numbers.c')
 passwords = library('passwords', 'passwords.c',
 	    link_with:htab)
+
+cc = meson.get_compiler('c')
+m_dep = cc.find_library('m', required: false)
 	  
 executable('day1', 'day1.c',
 		   link_with: numbers)
@@ -52,5 +55,9 @@ executable('day15', ['day15.c', 'lines.c'],
 
 executable('day16', ['day16.c', 'lines.c'],
 		   		   link_with: [htab])	
+
+executable('day17', ['day17.c', 'lines.c'],
+		    link_with: [htab],
+		    dependencies: [m_dep, xxhash_dep])	
 
  
